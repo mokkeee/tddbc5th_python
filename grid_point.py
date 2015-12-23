@@ -30,6 +30,9 @@ class GridPoint(object):
             return False
         return self._x == other._x and self._y == other._y
 
+    def __hash__(self):
+        return self._x << 11 + self._y
+
     def is_neighbor(self, other):
         if self.x == other.x:
             if self._is_neighbor_value(self.y, other.y):

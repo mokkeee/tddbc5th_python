@@ -68,15 +68,15 @@ class Test1_2:
         assert GridPoint(4, 7) != int(4)
 
 
-@pytest.mark.parametrize(('x', 'y', 'other_x', 'other_y', 'result'), [
-    (1, 2, 1, 1, True),
-    (1, 2, 1, 3, True),
-    (1, 2, 1, 2, False),
-    (1, 2, 2, 3, False),
-    (0, 2, 1, 2, True),
-    (0, 2, -1, 2, True),
+@pytest.mark.parametrize(('this', 'other', 'result'), [
+    ([1, 2], [1, 1], True),
+    ([1, 2], [1, 3], True),
+    ([1, 2], [1, 2], False),
+    ([1, 2], [2, 3], False),
+    ([0, 2], [1, 2], True),
+    ([0, 2], [-1, 2], True),
 ])
-def test_隣り合っている格子点の判定ができること(x, y, other_x, other_y, result):
-    this_grid = GridPoint(x, y)
-    other_grid = GridPoint(other_x, other_y)
+def test_隣り合っている格子点の判定ができること(this, other, result):
+    this_grid = GridPoint(this[0], this[1])
+    other_grid = GridPoint(other[0], other[1])
     assert this_grid.is_neighbor(other_grid) == result
