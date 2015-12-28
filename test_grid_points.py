@@ -84,6 +84,7 @@ def test_３つの格子点を持つ格子点集合の連結判定ができる�
         GridPoint(grid3[0], grid3[1]))
     assert grid_points.is_connected_grids() == result
 
+
 @pytest.mark.parametrize(('grid1', 'grid2', 'grid3', 'grid4', 'result'), [
     ([0, 0], [0, 1], [0, 2], [1, 2], True),
     ([0, 0], [0, 1], [0, 2], [2, 2], False),
