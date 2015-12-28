@@ -21,18 +21,33 @@ class Test_GridPoints1:
         assert not GridPoint(1, 3) in self.grid_points
 
 
-class Test_GridPoints_Error:
-    def test_同一格子点を持つ格子点集合は生成できないこと(self):
-        with pytest.raises(ValueError):
-            GridPoints(GridPoint(0, 1), GridPoint(0, 1))
-
+class Test_格子点集合:
     def test_格子点1つの格子点集合は生成できないこと(self):
         with pytest.raises(ValueError):
             GridPoints(GridPoint(0, 0))
 
-    def test_格子点5つの格子点集合は生成できないこと(self):
+    def test_2つの格子点をもつ格子点集合が生成できること(self):
+        points = GridPoints(GridPoint(0, 0), GridPoint(1, 1))
+        assert len(points) == 2
+
+    def test_3つの格子点をもつ格子点集合が生成できること(self):
+        points = GridPoints(GridPoint(0, 0), GridPoint(1, 1), GridPoint(2, 2))
+        assert len(points) == 3
+
+    def test_４つの格子点をもつ格子点集合が生成できること(self):
+        points = GridPoints(
+            GridPoint(0, 0), GridPoint(1, 1),
+            GridPoint(2, 2), GridPoint(-1, -1))
+        assert len(points) == 4
+
+    def test_5つの格子点をもつ格子点集合が生成できること(self):
+        points = GridPoints(
+            GridPoint(0, 0), GridPoint(1, 1), GridPoint(2, 2), GridPoint(3, 3), GridPoint(4, 4))
+        assert len(points) == 5
+
+    def test_同一格子点を持つ格子点集合は生成できないこと(self):
         with pytest.raises(ValueError):
-            GridPoints(GridPoint(0, 0), GridPoint(1, 1), GridPoint(2, 2), GridPoint(3, 3), GridPoint(4, 4))
+            GridPoints(GridPoint(0, 1), GridPoint(0, 1))
 
     def test_格子点以外を含んだ格子点集合は生成できないこと(self):
         with pytest.raises(ValueError):
@@ -53,18 +68,6 @@ def test_２つの格子点を持つ格子点集合の連結判定ができる�
         GridPoint(grid1[0], grid1[1]),
         GridPoint(grid2[0], grid2[1]))
     assert grid_points.is_connected_grids() == result
-
-
-class Test_格子点集合:
-    def test_3つの格子点をもつ格子点集合が生成できること(self):
-        points = GridPoints(GridPoint(0, 0), GridPoint(1, 1), GridPoint(2, 2))
-        assert len(points) == 3
-
-    def test_４つの格子点をもつ格子点集合が生成できること(self):
-        points = GridPoints(
-            GridPoint(0, 0), GridPoint(1, 1),
-            GridPoint(2, 2), GridPoint(-1, -1))
-        assert len(points) == 4
 
 
 @pytest.mark.parametrize(('grid1', 'grid2', 'grid3', 'result'), [

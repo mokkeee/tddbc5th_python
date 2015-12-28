@@ -23,8 +23,8 @@ class GridPoints(object):
         for grid in self._grids:
             if not self._has_neighbor(grid):
                 return False
-        return True
-        # return self._grids[0].is_neighbor(self._grids[1])
+        else:
+            return True
 
     def is_traversal(self):
         # if not self.is_connected_grids():
@@ -32,7 +32,7 @@ class GridPoints(object):
         start_grid = self._traverse_start_grid()
         traversed_grids = [start_grid]
         current_grid = start_grid
-        while len(traversed_grids) < len(self):
+        while not self._is_traverse_complete(traversed_grids):
             next_grid = self._next_grid(current_grid, traversed_grids)
             if next_grid is None:
                 return False
@@ -54,6 +54,9 @@ class GridPoints(object):
             return None
         return neighbors[0]
 
+    def _is_traverse_complete(self, traversed_grids):
+        return len(traversed_grids) == len(self)
+
     def _has_neighbor(self, grid):
         neighbors = self.neighbors(grid)
         if len(neighbors) == 0:
@@ -68,6 +71,6 @@ class GridPoints(object):
         points_count = len(args)
         if len(set(args)) != points_count:
             return False
-        if points_count not in [2, 3, 4]:
+        if points_count < 2:
             return False
         return True
