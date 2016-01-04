@@ -69,12 +69,12 @@ class Test1_2:
 
 
 @pytest.mark.parametrize(('this', 'other', 'result'), [
-    ([1, 2], [1, 1], True),
-    ([1, 2], [1, 3], True),
-    ([1, 2], [1, 2], False),
-    ([1, 2], [2, 3], False),
-    ([0, 2], [1, 2], True),
-    ([0, 2], [-1, 2], True),
+    ((1, 2), (1, 1), True),
+    ((1, 2), (1, 3), True),
+    ((1, 2), (1, 2), False),
+    ((1, 2), (2, 3), False),
+    ((0, 2), (1, 2), True),
+    ((0, 2), (-1, 2), True),
 ])
 def test_隣り合っている格子点の判定ができること(this, other, result):
     this_grid = GridPoint(this[0], this[1])
