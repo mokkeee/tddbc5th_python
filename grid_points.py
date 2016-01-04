@@ -9,18 +9,18 @@ class GridPoints(object):
     def __init__(self, *args):
         if not self.__is_valid_grids(args):
             raise ValueError
-        self._grids = args
+        self.__grids = args
 
     def __contains__(self, item):
         if not isinstance(item, GridPoint):
             return False
-        return item in self._grids
+        return item in self.__grids
 
     def __len__(self):
-        return len(self._grids)
+        return len(self.__grids)
 
     def is_connected_grids(self):
-        for grid in self._grids:
+        for grid in self.__grids:
             if not self.__has_neighbor(grid):
                 return False
         else:
@@ -42,10 +42,10 @@ class GridPoints(object):
             return True
 
     def neighbors(self, grid):
-        return [x for x in self._grids if x.is_neighbor(grid)]
+        return [x for x in self.__grids if x.is_neighbor(grid)]
 
     def __traverse_start_grid(self):
-        sorted_grids = sorted(self._grids, key=lambda x: len(self.neighbors(x)))
+        sorted_grids = sorted(self.__grids, key=lambda x: len(self.neighbors(x)))
         return sorted_grids[0]
 
     def __next_grid(self, current_grid, traversed_grids):
