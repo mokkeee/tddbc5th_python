@@ -64,6 +64,10 @@ class Test1_2:
     def test_格子点4_7と格子点3_7は等しくない(self):
         assert GridPoint(4, 7) != GridPoint(3, 7)
 
+    def test_格子点とNoneは等しくない(self):
+        assert not GridPoint(4, 7).__eq__(None)
+        assert GridPoint(4, 7).__ne__(None)
+
     def test_格子点と格子点でないクラスは等しくない(self):
         assert GridPoint(4, 7) != int(4)
 
