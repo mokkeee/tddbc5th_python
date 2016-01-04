@@ -7,7 +7,7 @@ __author__ = 'mokkeee'
 
 class GridPoints(object):
     def __init__(self, *args):
-        if not self._is_valid_grids(args):
+        if not self.__is_valid_grids(args):
             raise ValueError
         self._grids = args
 
@@ -21,7 +21,7 @@ class GridPoints(object):
 
     def is_connected_grids(self):
         for grid in self._grids:
-            if not self._has_neighbor(grid):
+            if not self.__has_neighbor(grid):
                 return False
         else:
             return True
@@ -29,11 +29,11 @@ class GridPoints(object):
     def is_traversal(self):
         # if not self.is_connected_grids():
         #     return False
-        start_grid = self._traverse_start_grid()
+        start_grid = self.__traverse_start_grid()
         traversed_grids = [start_grid]
         current_grid = start_grid
-        while not self._is_traverse_complete(traversed_grids):
-            next_grid = self._next_grid(current_grid, traversed_grids)
+        while not self.__is_traverse_complete(traversed_grids):
+            next_grid = self.__next_grid(current_grid, traversed_grids)
             if next_grid is None:
                 return False
             current_grid = next_grid
@@ -44,27 +44,27 @@ class GridPoints(object):
     def neighbors(self, grid):
         return [x for x in self._grids if x.is_neighbor(grid)]
 
-    def _traverse_start_grid(self):
+    def __traverse_start_grid(self):
         sorted_grids = sorted(self._grids, key=lambda x: len(self.neighbors(x)))
         return sorted_grids[0]
 
-    def _next_grid(self, current_grid, traversed_grids):
+    def __next_grid(self, current_grid, traversed_grids):
         neighbors = [x for x in self.neighbors(current_grid) if x not in traversed_grids]
         if len(neighbors) == 0:
             return None
         return neighbors[0]
 
-    def _is_traverse_complete(self, traversed_grids):
+    def __is_traverse_complete(self, traversed_grids):
         return len(traversed_grids) == len(self)
 
-    def _has_neighbor(self, grid):
+    def __has_neighbor(self, grid):
         neighbors = self.neighbors(grid)
         if len(neighbors) == 0:
             return False
         return True
 
     @staticmethod
-    def _is_valid_grids(args):
+    def __is_valid_grids(args):
         for point in args:
             if not isinstance(point, GridPoint):
                 return False

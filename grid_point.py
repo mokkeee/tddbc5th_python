@@ -11,39 +11,39 @@ class GridPoint(object):
             raise TypeError("x is not int value.")
         if not isinstance(y, int):
             raise TypeError("y is not int value.")
-        self._x = x
-        self._y = y
+        self.__x = x
+        self.__y = y
 
     @property
     def x(self):
-        return self._x
+        return self.__x
 
     @property
     def y(self):
-        return self._y
+        return self.__y
 
     def __str__(self):
-        return '(%d, %d)' % (self._x, self._y)
+        return '(%d, %d)' % (self.__x, self.__y)
 
     def __eq__(self, other):
         if not isinstance(other, GridPoint):
             return False
-        return self._x == other._x and self._y == other._y
+        return self.__x == other.__x and self.__y == other.__y
 
     def __hash__(self):
-        return self._x << 11 + self._y
+        return self.__x << 11 + self.__y
 
     def is_neighbor(self, other):
         if self.x == other.x:
-            if self._is_neighbor_value(self.y, other.y):
+            if self.__is_neighbor_value(self.y, other.y):
                 return True
         if self.y == other.y:
-            if self._is_neighbor_value(self.x, other.x):
+            if self.__is_neighbor_value(self.x, other.x):
                 return True
         return False
 
     @staticmethod
-    def _is_neighbor_value(self_value, other_value):
+    def __is_neighbor_value(self_value, other_value):
         if self_value == other_value - 1:
             return True
         if self_value == other_value + 1:
