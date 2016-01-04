@@ -30,6 +30,9 @@ class GridPoint(object):
             return False
         return self.__x == other.__x and self.__y == other.__y
 
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def __hash__(self):
         return self.__x << 11 + self.__y
 
