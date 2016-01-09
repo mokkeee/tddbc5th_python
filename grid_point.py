@@ -26,9 +26,9 @@ class GridPoint(object):
         return '(%d, %d)' % (self.__x, self.__y)
 
     def __eq__(self, other):
-        if not isinstance(other, GridPoint):
+        if not isinstance(other, self.__class__):
             return False
-        return self.__x == other.__x and self.__y == other.__y
+        return self.__dict__ == other.__dict__
 
     def __ne__(self, other):
         return not self.__eq__(other)
